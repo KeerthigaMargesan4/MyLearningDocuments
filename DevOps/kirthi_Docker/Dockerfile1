@@ -1,0 +1,6 @@
+FROM a0bc4dee75e4
+WORKDIR /
+ADD StudentManagement.jar StudentManagement.jar
+EXPOSE 8080
+#CMD java - jar StudentManagement.jar
+CMD ["java", "-jar", "StudentManagement.jar"]

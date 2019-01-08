@@ -1,0 +1,43 @@
+Keeping Your Fork Up to Date:
+
+# Add 'upstream' repo to list of remotes
+git remote add upstream https://github.com/KeerthigaMargesan4/JavaLearningProjects.git
+git remote add upstream git@github.com:KeerthigaMargesan4/JavaLearningProjects.git
+git remote add upstream git@github.com:DigitalInnovation/Cloud-Assembler.git
+
+# Verify the new remote named 'upstream'
+git remote -v
+
+# Fetch from upstream remote
+git fetch upstream
+
+# View all branches, including those from upstream
+git branch -va
+
+# Checkout your master branch and merge upstream
+git checkout master
+git merge upstream/master
+
+*******************************************************************************************************
+REMOVING REMOTE UPSTREAM:
+
+git remote -v
+# View current remotes
+origin  https://github.com/OWNER/REPOSITORY.git (fetch)
+origin  https://github.com/OWNER/REPOSITORY.git (push)
+destination  https://github.com/FORKER/REPOSITORY.git (fetch)
+destination  https://github.com/FORKER/REPOSITORY.git (push)
+git remote rm destination
+# Remove remote
+git remote -v
+# Verify it's gone
+origin  https://github.com/OWNER/REPOSITORY.git (fetch)
+origin  https://github.com/OWNER/REPOSITORY.git (push)
+
+*******************************************************************************************************
+renaming branch
+git branch -m old_branch new_branch         # Rename branch locally    
+git push origin :old_branch                 # Delete the old branch    
+git push --set-upstream origin new_branch   # Push the new branch, set local branch to track the new remote
+
+

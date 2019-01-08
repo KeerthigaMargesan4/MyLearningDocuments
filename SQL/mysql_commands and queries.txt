@@ -1,0 +1,89 @@
+MYSQL Commands:
+
+login to root user and list all users in the DB
+SELECT User FROM mysql.user;
+to delete the user: DROP USER 'shri'@'localhost';
+Show users privileges in MYSQL: SHOW GRANTS FOR 'kirthi'@'localhost';
+user tyable columns:
+Host
+User
+Select_priv
+Insert_priv
+Update_priv
+Delete_priv
+Create_priv
+Drop_priv
+Reload_priv
+Shutdown_priv
+Process_priv
+File_prer_priv
+create_tmp_tableLock_table_priv
+EXceute_priv
+Repl_slave_priv
+Repl_client_priv
+Create_view_priv
+Show_view_priv
+Create_routine_priv
+Alter_routine_priv
+Create_user_priv
+EVent_priv
+Trigger_priv
+Create_tablespace_priv
+ssl_type
+ssl_cipher
+x509_issuer
+x509_subject
+max_questions
+max_updates
+max_connections
+max_user_connectiobns
+plugin
+quthentication_string
+password_lifetime
+password_expired
+password_last_changed
+account_locked
+
+select Host,User,Select_priv,Insert_priv,Update_priv,Delete_priv,Create_priv,Drop_priv from mysql.user;
+
+to quit from db \q
+
+create Database: CREATE DATABASE kirthidb CHARACTER SET utf8 COLLATE utf8_bin;
+Drop database :DROP DATABASE testDB;
+List of databases: SHOW DATABASES;
+Create User: CREATE USER 'kirthi'@'localhost' IDENTIFIED BY 'G@nesh@64';
+or CREATE USER 'kirthi'@'%' IDENTIFIED BY 'G@nesh@64';
+here % is used as unnamed host
+
+Grant access:
+GRANT ALL PRIVILEGES ON * . * TO 'kirthi'@'localhost';
+
+FLUSH PRIVILEGES;
+to revoke access:
+REVOKE [type of permission] ON [database name].[table name] FROM ‘[username]’@‘localhost’;
+
+
+create table:
+CREATE TABLE Student (
+    ID int,    
+    FirstName varchar(255),
+    LastName varchar(255),
+    City varchar(255) 
+);
+Drop table:
+DROP TABLE Shippers;
+Truncate table:deletes data inside a table, but not the table itself.
+TRUNCATE TABLE table_name;
+delete * from tablename;
+
+Insert:
+INSERT INTO Student (ID,FirstName,LastName,City)
+VALUES ('886186','Manju','R','Coimbatore');
+
+SHOW TABLES;
+Show columns:
+SHOW COLUMNS FROM Student;
+
+
+to delete user:
+DROP USER ‘demo’@‘localhost’;

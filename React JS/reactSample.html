@@ -1,0 +1,29 @@
+<!DOCTYPE html>
+<html lang="en">
+<title>Test React</title>
+<!-- Load React API -->
+<script src= "https://unpkg.com/react@16/umd/react.production.min.js"></script>
+<!-- Load React DOM-->
+<script src= "https://unpkg.com/react-dom@16/umd/react-dom.production.min.js"></script>
+<!-- Load Babel Compiler -->
+
+
+<body>
+<div id="id01"> Hello World!</div> 
+<script type="text/babel">
+class Welcome extends React.Component {
+  render() {
+    return React.createElement(
+      "h1",
+      null,
+      "Hello ",
+      this.props.name,
+      "!"
+    );
+  }
+}
+ReactDOM.render(React.createElement(Welcome, { name: "Kirthi" }), document.getElementById('id01'));
+</script>
+</body>
+</html>
+

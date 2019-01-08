@@ -1,0 +1,6 @@
+FROM a0bc4dee75e4
+WORKDIR /
+ADD HelloWorld.jar HelloWorld.jar
+EXPOSE 8080
+#CMD java - jar HelloWorld.jar
+CMD ["java", "-jar", "HelloWorld.jar"]

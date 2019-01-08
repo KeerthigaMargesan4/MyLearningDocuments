@@ -1,0 +1,73 @@
+Maven Eclipse plugin installation step by step:
+1. Open Eclipse IDE
+2. Click Help -> Install New Software...
+3. Click Add button at top right corner
+4. At pop up: fill up Name as "M2Eclipse" and Location as "http://download.eclipse.org/technology/m2e/releases" 
+5. Now click OK
+6. Again Click Add button at top right corner
+7. At pop up: fill up Name as "Maven" and Location as "http://repo1.maven.org/maven2/.m2e/connectors/m2eclipse-mavenarchiver/0.17.2/N/LATEST/" 
+8. Now click OK
+After that installation would be started.
+Another way to install Maven plug-in for Eclipse:
+1. Open Eclipse
+2. Go to Help -> Eclipse Marketplace
+3. Search by Maven
+4. Click "Install" button at "Maven Integration for Eclipse" section
+5. Follow the instruction step by step
+After successful installation do the followings in Eclipse:
+1. Go to Window --> Preferences
+2. Observe, Maven is enlisted at left panel
+Finally,
+1. Click on an existing project
+2. Select Configure -> Convert to Maven Project
+
+After try to create a Soring boot project. If any problem occurs then try adding path in enviroment variable
+
+download apache-maven-3.5.0-src from Maven repo and place it in some path and add those path in enviroment variable pointing to it like this 
+Name: MAVEN_HOME
+Path: C:\Users\886758\Documents\Java_Learning\Tools\apache-maven-3.5.0-src\apache-maven-3.5.0
+
+add settings.xml file in the following location
+C:\Users\886758\.m2\repository
+
+settings.xml:
+<?xml version="1.0" encoding="UTF-8"?>
+<settings
+ xmlns="http://maven.apache.org/SETTINGS/1.0.0" xmlns:xsi="http://www.w3.org/2001/XMLSchema-instance"
+ xsi:schemaLocation="http://maven.apache.org/SETTINGS/1.0.0 http://maven.apache.org/xsd/settings-1.0.0.xsd">
+ <pluginGroups/>
+ <proxies>
+  <!-- Proxy for HTTP -->
+  <proxy>
+   <id>optional</id>
+   <active>true</active>
+   <protocol>http</protocol>
+   <username></username>
+   <password></password>
+   <host>proxy.tcs.com</host>
+   <port>8080</port>
+   <nonProxyHosts>local.net</nonProxyHosts>
+  </proxy>
+
+  <!-- Proxy for HTTPS -->
+  <proxy>
+   <id>optional</id>
+   <active>true</active>
+   <protocol>https</protocol>
+   <username></username>
+   <password></password>
+   <host>proxy.tcs.com</host>
+   <port>8080</port>
+   <nonProxyHosts>local.net</nonProxyHosts>
+  </proxy>
+ </proxies>
+
+ <servers/>
+ <mirrors/>
+ <profiles/>
+</settings>
+
+then go to eclipse->windows->preferences->maven->user settings-> in user settings browse to the Settings.xml location
+C:\Users\886758\.m2\repository\settings.xml
+then click on update settings->apply->ok.
+Thats It!!!!

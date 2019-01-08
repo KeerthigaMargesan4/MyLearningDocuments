@@ -1,0 +1,91 @@
+Online sql editor for SQL server queries:
+
+http://rextester.com/l/sql_server_online_compiler
+
+http://rextester.com/icgy32404
+Note: have to paste full query from create insert in the same editor
+
+******************************************************************************************************************************
+CREATE TABLE student(id int, name varchar(1));
+ 
+INSERT INTO student(id, name)VALUES(1, 'A'),(1,'B'),(1,'C'),(2,'A'),(2,'B'),(3,'A');
+
+select * from student;
+
+select distinct t1.id,
+  STUFF((SELECT distinct ',' + t2.name
+         from student t2
+         where t1.id = t2.id
+            FOR XML PATH(''), TYPE
+            ).value('.', 'NVARCHAR(MAX)') 
+        ,1,1,'') data
+from student t1;
+******************************************************************************************************************************
+select distinct SKU,Store_id,Lang_Id,
+STUFF((     SELECT ',' + details_description_type_name
+            FROM Description_Details
+            FOR XML PATH('')
+            ), 1, 1, '') details_description_type_name            
+FROM Description_Details;
+******************************************************************************************************************************
+CREATE TABLE Description_Details
+(SKU varchar(50),
+Store_id int,
+Lang_Id int,
+details_description_type_id int,
+details_description_type_name varchar(254),
+display_sequence int,
+details_text nvarchar(2000)
+);
+ 
+INSERT INTO Description_Details(SKU , Store_id , Lang_Id , details_description_type_id , details_description_type_name , display_sequence , details_text)
+VALUES
+('100974',5051,-1,1,'Paragraph',1,'CLOB,19 bytes'),	
+('100974',5051,-1,2,'Bullets',1,'CLOB,10 bytes'),
+('100974',5051,-1,11,'Headliner',1,'CLOB,18 bytes'),
+('100999',6051,1,2,'Paragraph',1,'CLOB,18 bytes'),
+('100999',6051,1,11,'Headliner',2,'CLOB,18 bytes'),
+('100976',6051,1,11,'Headliner',1,'CLOB,18 bytes');
+
+select * from Description_Details;
+
+select distinct t1.SKU,t1.Store_id,t1.Lang_Id,
+  details_description_type_id = STUFF((SELECT distinct ',' + CAST(t2.details_description_type_id AS VARCHAR(100))
+                                       from Description_Details t2
+                                       where t1.SKU = t2.SKU and t1.Store_id = t2.Store_id and t1.Lang_Id = t2.Lang_Id
+                                       FOR XML PATH(''), TYPE).value('.', 'NVARCHAR(MAX)'),1,1,''),
+  details_description_type_name = STUFF((SELECT distinct ',' + t2.details_description_type_name
+                                         from Description_Details t2
+                                         where t1.SKU = t2.SKU and t1.Store_id = t2.Store_id and t1.Lang_Id = t2.Lang_Id
+                                         FOR XML PATH(''), TYPE).value('.', 'NVARCHAR(MAX)'),1,1,''),
+  display_sequence = STUFF((SELECT distinct ',' + CAST(t2.display_sequence AS VARCHAR(100))
+                                       from Description_Details t2
+                                       where t1.SKU = t2.SKU and t1.Store_id = t2.Store_id and t1.Lang_Id = t2.Lang_Id
+                                       FOR XML PATH(''), TYPE).value('.', 'NVARCHAR(MAX)'),1,1,''),
+  details_text = STUFF((SELECT distinct ',' + t2.details_text
+                                         from Description_Details t2
+                                         where t1.SKU = t2.SKU and t1.Store_id = t2.Store_id and t1.Lang_Id = t2.Lang_Id
+                                         FOR XML PATH(''), TYPE).value('.', 'NVARCHAR(MAX)'),1,1,'')                                                                           
+from Description_Details t1;
+*********************************************************************************************************************************
+
+** for String column**
+select distinct t1.SKU,t1.Store_id,t1.Lang_Id,
+  STUFF((SELECT distinct ',' + t2.details_description_type_name
+         from dbo.Description_Details t2
+         where t1.SKU = t2.SKU and t1.Store_id = t2.Store_id and t1.Lang_Id = t2.Lang_Id
+            FOR XML PATH(''), TYPE
+            ).value('.', 'NVARCHAR(MAX)') 
+        ,1,1,'') details_description_type_name  
+from dbo.Description_Details t1;
+
+** for Integer column**
+select distinct t1.SKU,t1.Store_id,t1.Lang_Id,
+  STUFF((SELECT distinct ',' + CAST(t2.details_description_type_id AS VARCHAR(100))
+         from dbo.Description_Details t2
+         where t1.SKU = t2.SKU and t1.Store_id = t2.Store_id and t1.Lang_Id = t2.Lang_Id
+            FOR XML PATH(''), TYPE
+            ).value('.', 'NVARCHAR(MAX)') 
+        ,1,1,'') details_description_type_id
+from dbo.Description_Details t1;
+******************************************************************************************************************************

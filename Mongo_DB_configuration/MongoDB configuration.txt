@@ -1,0 +1,21 @@
+4. Enviroment Variable Set-up:
+	setx path "C:\Program Files\MongoDB\Server\3.0\Bin" 
+	Check using the command mongo -version
+
+
+5. Create a configuration file for the server to log the results:
+	d:\mongodb\mongo.config
+
+6. Contents of mongo.config file
+	##store data here
+	dbpath=D:\mongodb\data
+
+	##all output go here
+	logpath=D:\mongodb\log\mongo.log
+
+	##log read and write operations
+	diaglog=3
+
+7. Run MongoDB server :  mongod.exe --config C:\Users\886758\Documents\MongoDB\mongo.config
+
+8. Open new comand prompt set the path then connect to Mongo DB using the COmmand : mongo.exe
